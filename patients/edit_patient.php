@@ -1,7 +1,5 @@
 <?php
 require_once '../includes/dbconfig.php';
-require_once '../includes/header.php';
-
 
 if (!isset($_GET['id']) || empty($_GET['id'])) {
     echo "Invalid patient ID.";
@@ -41,21 +39,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<div class="container">
-    <h2>Edit Patient</h2>
-    <form method="post">
-        <input name="medical_record_no" value="<?= $patient['medical_record_no'] ?>" required><br><br>
-        <input name="full_name" value="<?= $patient['full_name'] ?>" required><br><br>
-        <input type="date" name="date_of_birth" value="<?= $patient['date_of_birth'] ?>" required><br><br>
-        <select name="gender">
-            <option <?= $patient['gender'] === 'Male' ? 'selected' : '' ?>>Male</option>
-            <option <?= $patient['gender'] === 'Female' ? 'selected' : '' ?>>Female</option>
-            <option <?= $patient['gender'] === 'Other' ? 'selected' : '' ?>>Other</option>
-        </select><br><br>
-        <input name="phone" value="<?= $patient['phone'] ?>"><br><br>
-        <textarea name="address"><?= $patient['address'] ?></textarea><br><br>
-        <button type="submit">Update</button>
-    </form>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Patient</title>
+    <link rel="stylesheet" href="/korle-bu-pims/assets/css/style.css">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Edit Patient</h2>
+        <form method="post">
+            <label for="medical_record_no">Medical Record No</label>
+            <input id="medical_record_no" name="medical_record_no" value="<?= htmlspecialchars($patient['medical_record_no']) ?>" required>
 
-<?php require_once '../includes/footer.php'; ?>
+            <label for="full_name">Full Name</label>
+            <input id="full_name" name="full_name" value="<?= htmlspecialchars($patient['full_name']) ?>" required>
+
+            <label for="date_of_birth">Date of Birth</label>
+            <input type="date" id="date_of_birth" name="date_of_birth" value="<?= htmlspecialchars($patient['date_of_birth']) ?>" required>
+
+            <label for="gender">Gender</label>
+            <select id="gender" name="gender" required>
+                <option value="Male" <?= $patient['gender'] === 'Male' ? 'selected' : '' ?>>Male</option>
+                <option value="Female" <?= $patient['gender'] === 'Female' ? 'selected' : '' ?>>Female</option>
+                <option value="Other" <?= $patient['gender'] === 'Other' ? 'selected' : '' ?>>Other</option>
+            </select>
+
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" value="<?= htmlspecialchars($patient['phone']) ?>">
+
+            <label for="address">Address</label>
+            <textarea id="address" name="address"><?= htmlspecialchars($patient['address']) ?></textarea>
+
+            <button type="submit">Update Patient</button>
+        </form>
+    </div>
+</body>
+</html>

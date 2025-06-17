@@ -15,7 +15,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ':phone' => $_POST['phone'],
         ':address' => $_POST['address']
     ]);
+
     $success = "Patient added successfully!";
+
+ 
+// Get inserted patient ID
+    $patientId = $pdo->lastInsertId();
+
+    // Redirect to add medical history page with the ID
+    header("Location: ../medical_history/add_history.php?patient_id=$patientId");
+    exit;
 }
 ?>
 

@@ -2,69 +2,71 @@
 require_once '../includes/dbconfig.php';
 require_once '../includes/header.php';
 
-// Handle form submission
+$success = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $medical_record_no = $_POST['medical_record_no'];
-    $full_name = $_POST['full_name'];
-    $date_of_birth = $_POST['date_of_birth'];
-    $gender = $_POST['gender'];
-    $phone = $_POST['phone'];
-    $address = $_POST['address'];
-
-    // Insert into DB
-    try {
-        $stmt = $pdo->prepare("INSERT INTO patients (medical_record_no, full_name, date_of_birth, gender, phone, address) 
-                               VALUES (:medical_record_no, :full_name, :date_of_birth, :gender, :phone, :address)");
-        $stmt->execute([
-            ':medical_record_no' => $medical_record_no,
-            ':full_name' => $full_name,
-            ':date_of_birth' => $date_of_birth,
-            ':gender' => $gender,
-            ':phone' => $phone,
-            ':address' => $address
-        ]);
-        $success = "Patient added successfully!";
-    } catch (PDOException $e) {
-        $error = "Error: " . $e->getMessage();
-    }
+    $stmt = $pdo->prepare("INSERT INTO patients 
+        (medical_record_no, full_name, date_of_birth, gender, phone, address)
+        VALUES (:medical_record_no, :full_name, :date_of_birth, :gender, :phone, :address)");
+    $stmt->execute([
+        ':medical_record_no' => $_POST['medical_record_no'],
+        ':full_name' => $_POST['full_name'],
+        ':date_of_birth' => $_POST['date_of_birth'],
+        ':gender' => $_POST['gender'],
+        ':phone' => $_POST['phone'],
+        ':address' => $_POST['address']
+    ]);
+    $success = "Patient added successfully!";
 }
 ?>
 
-<div class="container">
-    <h2>Add New Patient</h2>
+<!DOCTYPE html>
+<html lang="en">
 
-    <?php if (!empty($success)): ?>
-        <p style="color: green;"><?php echo $success; ?></p>
-    <?php elseif (!empty($error)): ?>
-        <p style="color: red;"><?php echo $error; ?></p>
-    <?php endif; ?>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../assets/css/style.css" type="text/css">
+</head>
 
-    <form method="POST" action="">
-        <label>Medical Record Number:</label><br>
-        <input type="text" name="medical_record_no" required><br><br>
+<body>
+    <div class="form-container">
+        <h2>Add Patient</h2>
+        <?php if (!empty($success)): ?>
+            <p class="success-msg"><?= $success ?></p>
+        <?php endif; ?>
 
-        <label>Full Name:</label><br>
-        <input type="text" name="full_name" required><br><br>
+        <form method="post">
+            <label>Medical Record No</label>
+            <input name="medical_record_no" required>
 
-        <label>Date of Birth:</label><br>
-        <input type="date" name="date_of_birth" required><br><br>
+            <label>Full Name</label>
+            <input name="full_name" required>
 
-        <label>Gender:</label><br>
-        <select name="gender" required>
-            <option value="">-- Select --</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
-        </select><br><br>
+            <label>Date of Birth</label>
+            <input type="date" name="date_of_birth" required>
 
-        <label>Phone:</label><br>
-        <input type="text" name="phone"><br><br>
+            <label>Gender</label>
+            <select name="gender" required>
+                <option value="">Select Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+            </select>
 
-        <label>Address:</label><br>
-        <textarea name="address" rows="3"></textarea><br><br>
+            <label>Phone</label>
+            <input name="phone">
 
-        <button type="submit">Add Patient</button>
-    </form>
-</div>
+            <label>Address</label>
+            <textarea name="address"></textarea>
 
-<?php require_once '../includes/footer.php'; ?>
+            <button type="submit">Save</button>
+        </form>
+    </div>
+</body>
+
+</html>
+
+
+
+ <?php //require_once '../includes/footer.php';?> 

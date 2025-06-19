@@ -1,6 +1,7 @@
 <?php
+session_start();
 require_once '../includes/dbconfig.php';
-require_once '../includes/header.php';
+//require_once '../includes/header.php';
 
 $success = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -16,17 +17,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ':address' => $_POST['address']
     ]);
 
-    $success = "Patient added successfully!";
-
- 
-// Get inserted patient ID
+    // Get inserted patient ID
     $patientId = $pdo->lastInsertId();
 
-    // Redirect to add medical history page with the ID
-    header("Location: ../medical_history/add_history.php?patient_id=$patientId");
+    // Save ID to session and redirect without putting it in the URL
+    $_SESSION['patient_id'] = $patientId;
+    header("Location: ../medical_history/add_history.php");
     exit;
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

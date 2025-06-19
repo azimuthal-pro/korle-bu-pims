@@ -1,8 +1,8 @@
 <?php
+session_start();
 require_once '../includes/dbconfig.php';
 
-
-$patientId = $_GET['patient_id'] ?? null;
+$patientId = $_SESSION['patient_id'] ?? null;
 
 if (!$patientId) {
     echo "No patient selected.";
@@ -20,24 +20,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         VALUES (?, ?, ?, ?, ?, NOW())");
 
     $stmt->execute([$patientId, $diagnosis, $diagnosis_date, $medication, $dose]);
+
+    // Optionally clear the patient ID from session after first use
+    //unset($_SESSION['patient_id']);
+
+    // Redirect or show success message
+    header("Location: view_history.php");
+    exit;
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Medical History</title>
     <link rel="stylesheet" href="/korle-bu-pims/assets/css/style.css">
 </head>
-
 <body>
     <div class="form-container">
+        <h2>Add Medical History</h2>
         <form method="post">
-            <input type="hidden" name="patient_id" value="<?= htmlspecialchars($patientId) ?>">
-
             <label>Diagnosis:</label><br>
             <textarea name="diagnosis" required></textarea><br><br>
 
@@ -53,8 +56,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <button type="submit">Add History</button>
         </form>
     </div>
-
-
 </body>
-
 </html>

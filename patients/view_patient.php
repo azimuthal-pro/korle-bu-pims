@@ -28,10 +28,10 @@ $patients = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="view-wrapper">
         <h2>Patient Records</h2>
 
-      <form method="get" class="search-form" onsubmit="return false;">
+      <form method="get" class="search-form">
     <div class="search-input-wrapper">
         <input type="text" id="searchBox" name="search" placeholder="Search by name or medical number" autocomplete="off">
-        <button type="submit" onclick="submitSearch()">Search</button>
+        <button type="submit">Search</button>
     </div>
     <div id="suggestions" class="suggestions-box"></div>
 </form>

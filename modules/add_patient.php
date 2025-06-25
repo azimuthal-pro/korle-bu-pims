@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 require_once '../includes/dbconfig.php';
 //require_once '../includes/header.php';
 

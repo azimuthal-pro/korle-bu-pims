@@ -56,7 +56,7 @@ require_once '../includes/session.php'; // checks if admin is logged in
     <!-- Sidebar Navigation -->
     <nav class="sidebar">
         <ul>
-            <li><a href="?page=home">🏠 Home</a></li>
+           <!-- <li><a href="?page=home">🏠 Home</a></li> -->
 
             <li class="dropdown">
                 <a href="#">👤 Patient</a>
@@ -76,8 +76,8 @@ require_once '../includes/session.php'; // checks if admin is logged in
             <li class="dropdown">
                 <a href="#">📊 Reports</a>
                 <div class="dropdown-content">
-                    <a href="?page=patient_reports">👥 Patient Reports</a>
-                    <a href="?page=history_reports">📚 Medical History Reports</a>
+                    <a href="?page=patients_report">👥 Patient Reports</a>
+                    <a href="?page=medical_history_report">📚 Medical History Reports</a>
                 </div>
             </li>
 

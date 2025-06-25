@@ -65,7 +65,7 @@ $patients = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <td><?= htmlspecialchars($patient['address']) ?></td>
                                 <td>
                                     <a class="btn edit" href="edit_patient.php?id=<?= $patient['id'] ?>">Edit</a>
-                                    <a class="btn delete" href="delete_patient.php?id=<?= $patient['id'] ?>" onclick="return confirm('Delete this patient?')">Delete</a>
+                                    <a class="btn delete" href="../patients/delete_patient.php?id=<?= $patient['id'] ?>" onclick="return confirm('Delete this patient?')">Delete</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

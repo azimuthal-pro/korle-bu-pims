@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 require_once '../includes/dbconfig.php';
 
 $patientId = $_SESSION['patient_id'] ?? null;

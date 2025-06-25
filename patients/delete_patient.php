@@ -23,6 +23,6 @@ $stmt = $pdo->prepare("DELETE FROM patients WHERE id = ?");
 $stmt->execute([$id]);
 
 // Redirect back to the list
-header("Location: view_patient.php");
+header("Location: ../modules/view_patient.php");
 exit;
 ?>

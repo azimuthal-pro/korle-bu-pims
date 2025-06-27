@@ -31,7 +31,7 @@ require_once '../includes/session.php'; // checks if admin is logged in
         }
 
         .sidebar ul li a:hover {
-            background-color: #444;
+            background-color: #24bbee;
         }
 
         .dropdown-content a {
@@ -56,7 +56,7 @@ require_once '../includes/session.php'; // checks if admin is logged in
     <!-- Sidebar Navigation -->
     <nav class="sidebar">
         <ul>
-           <!-- <li><a href="?page=home">🏠 Home</a></li> -->
+           <li><a href="?page=home">🏠 Home</a></li>
 
             <li class="dropdown">
                 <a href="#">👤 Patient</a>

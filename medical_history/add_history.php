@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     //unset($_SESSION['patient_id']);
 
     // Redirect or show success message
-    header("Location: ../modules/view_history.php");
+    header("Location: ../admin/dashboard.php");
     exit;
 }
 ?>

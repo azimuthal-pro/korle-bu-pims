@@ -4,7 +4,7 @@ require_once '../includes/dbconfig.php';
 $query = "SELECT mh.*, p.medical_record_no 
           FROM medical_history mh
           JOIN patients p ON mh.patient_id = p.id
-          ORDER BY mh.created_at DESC";
+          ORDER BY mh.created_at ASC";
 
 $stmt = $pdo->query($query);
 $histories = $stmt->fetchAll(PDO::FETCH_ASSOC);
